@@ -1,0 +1,13 @@
+@import "sass/helpers/variables"; // in the first: define the variables
+@import "sass/helpers/mixins";
+@import "sass/layout/grid";
+@import "sass/components/buttons"; // then call it
+@import "sass/components/headings";
+
+@import "sass/pages/globalpage";
+@import "sass/layout/header";
+// @import "homepage-rtl";
+
+@import "sass/pages/homepage";
+
+@import "sass/layout/footer";

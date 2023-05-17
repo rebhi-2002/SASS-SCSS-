@@ -1,0 +1,193 @@
+/*
+** Media Query Mixin For Help Only
+** Demo Version Only For The Course
+*/
+
+@mixin minMedium {
+  @media (min-width: 992px) {
+    @content;
+  }
+}
+
+/*
+** Overlay Mixin
+** Overlay Main Properties
+*/
+
+@mixin overlay {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/*
+** Prefixes Mixin
+** Auto Add Prefixes To Properties
+*/
+
+@mixin prefixer($property, $value, $prefixes: ()) {
+  @each $prefix in $prefixes {
+    #{"-" + $prefix + "-" + $property}: $value;
+  }
+  #{$property}: $value;
+}
+
+/*
+** Animation Mixin
+**Auto Add Prefixes To Animation
+*/
+
+@mixin keyFrame($animation-name) {
+  @-webkit-keyframes #{$animation-name} {
+    @content;
+  }
+  @-moz-keyframes #{$animation-name} {
+    @content;
+  }
+  @keyframes #{$animation-name} {
+    @content;
+  }
+}
+
+// تصميم موقع بواسطة Sass - درس 26_ - تعلم أسرار متقدمة في ال Sass الجزء الأول
+
+@mixin opacity($value) {
+  zoom: 1; // For Support Internet Explorer
+  $opacity-ie: $value * 100;
+  filter: alpha(opacity = $opacity-ie);
+  opacity: $value;
+}
+.element {
+  @include opacity(0.4);
+}
+
+// result:
+.element {
+  zoom: 1;
+  filter: alpha(opacity = 40);
+  opacity: 0.4;
+}
+
+// CSS Transparency Settings for All Browsers
+
+@mixin transition($args...) {
+  -webkit-transition: $args;
+  -moz-transition: $args;
+  -o-transition: $args;
+  transition: $args;
+}
+.element {
+  @include opacity(0.9);
+  @include transition(all 0.3s ease-in-out);
+}
+
+// result:
+.element {
+  zoom: 1;
+  filter: alpha(opacity = 90);
+  opacity: 0.9;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+.element {
+  @include opacity(0.9);
+  @include transition(all 0.3s ease-in-out);
+  color: red + blue; // color: magenta;
+  color: #ff0000 + #008800; // color: #ff8800;
+  color: #f00 + #00f; // color: magenta;
+}
+
+// تصميم موقع بواسطة Sass - درس 27_ - تعلم أسرار متقدمة في ال Sass الجزء الثاني
+
+.element {
+  .child {
+    font: {
+      weight: bold;
+      style: 20px;
+      family: Arial;
+    }
+    border: {
+      right: 1px solid #ccc;
+      left: 1px solid #ddd;
+    }
+    padding: {
+      left: 10px;
+      right: 10px;
+    }
+  }
+}
+
+// result:
+.element .child {
+  font-weight: bold;
+  font-style: 20px;
+  font-family: Arial;
+  border-right: 1px solid #ccc;
+  border-left: 1px solid #ddd;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+// Extend:
+.error {
+  color: red;
+  font-weight: bold;
+}
+.element {
+  @extend .error;
+  font-size: 20px;
+}
+
+// result:
+.error,
+.element {
+  color: red;
+  font-weight: bold;
+}
+.element {
+  font-size: 20px;
+}
+
+// placeholder:
+%error {
+  color: red;
+  font-weight: bold;
+}
+.element {
+  @extend %error;
+  font-size: 20px;
+}
+
+// result:
+.element {
+  color: red;
+  font-weight: bold;
+}
+.element {
+  font-size: 20px;
+}
+
+%background {
+  -webkit-background-size: cover;
+}
+.element {
+  @extend %background;
+  font-size: 20px;
+}
+
+// result:
+.element {
+  -webkit-background-size: cover;
+}
+.element {
+  font-size: 20px;
+}
+
+// compas, Frame Work for SASS.
+// SASS Mixin
